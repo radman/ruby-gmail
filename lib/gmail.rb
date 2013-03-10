@@ -54,8 +54,6 @@ class Gmail
 
   # gmail.label(name)
   def label(name)
-    return Mailbox.new(self, name) if !label_exists?(name)
-
     mailboxes[name] ||= Mailbox.new(self, name)
   end
   alias :mailbox :label

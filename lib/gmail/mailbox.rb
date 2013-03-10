@@ -53,8 +53,13 @@ class Gmail
       end
 
       # puts "Gathering #{(aliases[key] || key).inspect} messages for mailbox '#{name}'..."
-      @gmail.in_mailbox(self) do
-        @gmail.imap.uid_search(search).collect { |uid| messages[uid] ||= Message.new(@gmail, self, uid) }
+
+      if @gmail.label_exists?(name)
+        @gmail.in_mailbox(self) do
+          @gmail.imap.uid_search(search).collect { |uid| messages[uid] ||= Message.new(@gmail, self, uid) }
+        end
+      else
+        return []
       end
     end
 
