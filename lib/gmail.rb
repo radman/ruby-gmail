@@ -48,10 +48,6 @@ class Gmail
       label[:name].each_line { |l| labels << l }; labels }
   end
 
-  def label_exists?(label)
-    labels.include?(label)
-  end
-
   # gmail.label(name)
   def label(name)
     mailboxes[name] ||= Mailbox.new(self, name)
