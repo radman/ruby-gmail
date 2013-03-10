@@ -10,9 +10,8 @@ class Gmail
       "<#Message:#{object_id} mailbox=#{@mailbox.name}#{' uid='+@uid.to_s if @uid}#{' message_id='+@message_id.to_s if @message_id}>"
     end
 
-    # Auto IMAP info
     def uid
-      @uid ||= @gmail.imap.uid_search(['HEADER', 'Message-ID', message_id])[0]
+      @uid ||= self.message.message_id
     end
 
     # IMAP Operations
